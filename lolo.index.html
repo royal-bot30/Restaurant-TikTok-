@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant TikTok — Lomé</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #222; }
+
+    /* NAV */
+    nav {
+      background: #010101;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 40px;
+      position: sticky; top: 0; z-index: 999;
+    }
+    .nav-logo { color: #fff; font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; }
+    .nav-logo span { color: #fe2c55; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .nav-links a:hover { color: #25f4ee; }
+
+    section { padding: 70px 40px; }
+    .section-title {
+      font-size: 1.8rem; font-weight: 700; margin-bottom: 20px;
+      position: relative; display: inline-block;
+    }
+    .section-title::after {
+      content: ''; display: block; height: 4px; width: 60px;
+      background: #fe2c55; margin-top: 8px; border-radius: 2px;
+    }
+
+    /* 1 - BIENVENUE */
+    #bienvenue {
+      background: linear-gradient(135deg, #010101 60%, #1a0a0a 100%);
+      color: #fff; text-align: center; padding: 100px 40px;
+    }
+    #bienvenue .badge {
+      display: inline-block; background: #fe2c55;
+      color: #fff; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 20px; margin-bottom: 24px;
+    }
+    #bienvenue h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900;
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    #bienvenue h1 span { color: #fe2c55; }
+    .slogan {
+      font-size: 1.3rem; font-style: italic; color: #25f4ee;
+      margin-bottom: 28px; font-weight: 300;
+    }
+    #bienvenue p {
+      max-width: 600px; margin: 0 auto;
+      color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8;
+    }
+    .btn-voir-menu {
+      display: inline-block; margin-top: 36px;
+      background: #fe2c55; color: #fff;
+      padding: 15px 40px; border-radius: 8px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      letter-spacing: 1px; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-voir-menu:hover { background: #e01e45; transform: translateY(-3px); }
+
+    /* 2 - QUI SOMMES NOUS */
+    #qui { background: #f9f9f9; }
+    .qui-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .qui-inner p { color: #555; line-height: 1.9; font-size: 1rem; margin-bottom: 16px; }
+    .qui-inner strong { color: #fe2c55; }
+
+    /* 3 - GALERIE */
+    #galerie { background: #fff; text-align: center; }
+    .galerie-placeholder {
+      width: 100%; max-width: 800px; height: 400px;
+      background: #f0f0f0; border: 2px dashed #ccc;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto; border-radius: 12px; color: #aaa; font-size: 1rem;
+    }
+
+    /* 4 - POURQUOI NOUS */
+    #pourquoi { background: #010101; color: #fff; text-align: center; }
+    #pourquoi .section-title { color: #fff; }
+    .raisons-grid {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; margin-top: 40px;
+    }
+    .raison-card {
+      background: #1a1a1a; border-radius: 14px;
+      padding: 36px 28px; max-width: 280px; width: 100%;
+      border-top: 4px solid #fe2c55; transition: transform 0.25s;
+    }
+    .raison-card:hover { transform: translateY(-6px); }
+    .raison-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .raison-card h3 { font-size: 1.1rem; color: #25f4ee; margin-bottom: 12px; font-weight: 600; }
+    .raison-card p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+    /* 5 - MENU */
+    #menu { background: #f9f9f9; }
+    .menu-subtitle {
+      font-size: 1.3rem; font-weight: 700; color: #010101;
+      margin: 40px 0 20px; border-left: 5px solid #fe2c55; padding-left: 14px;
+    }
+
+    /* Entrées */
+    .entrees-grid {
+      display: flex; gap: 20px; overflow-x: auto; padding-bottom: 12px;
+    }
+    .entrees-grid::-webkit-scrollbar { height: 4px; }
+    .entrees-grid::-webkit-scrollbar-thumb { background: #fe2c55; border-radius: 2px; }
+
+    .plat-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      transition: transform 0.25s; display: flex; flex-direction: column;
+    }
+    .plat-card:hover { transform: translateY(-4px); }
+    .entree-card { min-width: 200px; width: 200px; }
+
+    .plat-img-placeholder {
+      width: 100%; background: #e8e8e8;
+      display: flex; align-items: center; justify-content: center;
+      color: #bbb; font-size: 0.75rem; text-align: center;
+    }
+    .entree-card .plat-img-placeholder { height: 140px; }
+
+    .plat-info { padding: 14px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .plat-name { font-size: 0.9rem; font-weight: 600; color: #222; margin-bottom: 4px; }
+    .plat-price { font-size: 0.95rem; font-weight: 700; color: #fe2c55; margin-bottom: 10px; }
+
+    .btn-commander {
+      display: block; width: 100%;
+      background: #25a244; color: #fff;
+      border: none; border-radius: 6px;
+      padding: 9px; font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      text-decoration: none; text-align: center;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .btn-commander:hover { background: #1d8a38; }
+
+    /* Plats & Desserts - horizontal comme entrées */
+    .plats-list {
+      display: flex; gap: 20px; overflow-x: auto; padding-bottom: 12px;
+    }
+    .plats-list::-webkit-scrollbar { height: 4px; }
+    .plats-list::-webkit-scrollbar-thumb { background: #fe2c55; border-radius: 2px; }
+    .plat-list-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      min-width: 200px; width: 200px;
+      display: flex; flex-direction: column;
+      transition: transform 0.25s; flex-shrink: 0;
+    }
+    .plat-list-card:hover { transform: translateY(-4px); }
+    .plat-list-card .plat-img-placeholder { width: 100%; height: 140px; }
+    .plat-list-info {
+      padding: 14px; flex: 1;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .plat-list-info .plat-name { font-size: 0.9rem; }
+    .plat-list-info .plat-price { font-size: 0.95rem; margin-bottom: 10px; }
+
+    /* 6 - POLITIQUE */
+    #politique { background: #25f4ee; text-align: center; padding: 50px 40px; }
+    #politique h2 { font-size: 1.5rem; font-weight: 700; color: #010101; margin-bottom: 14px; }
+    #politique p { font-size: 1rem; color: #010101; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    .politique-icons { display: flex; justify-content: center; gap: 50px; margin-top: 30px; }
+    .pol-icon span { font-size: 2.5rem; display: block; }
+    .pol-icon p { font-size: 0.8rem; font-weight: 600; color: #010101; margin-top: 8px; }
+
+    /* 7 - ADRESSE */
+    #adresse { background: #fff; text-align: center; }
+    #adresse p { color: #555; font-size: 1rem; line-height: 1.8; max-width: 500px; margin: 0 auto 30px; }
+    .maps-band {
+      background: #87ceeb; padding: 28px 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 12px; max-width: 500px; margin: 0 auto;
+    }
+    .btn-maps {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #010101; color: #fff;
+      padding: 14px 32px; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .btn-maps:hover { background: #fe2c55; }
+
+    /* 8 - CONTACT */
+    #contact { background: #010101; color: #fff; text-align: center; }
+    #contact .section-title { color: #fff; }
+    #contact p { color: rgba(255,255,255,0.65); font-size: 1rem; margin-bottom: 20px; }
+    .contact-phone { font-size: 1.3rem; font-weight: 700; color: #25f4ee; margin-bottom: 30px; }
+    .wa-band {
+      background: #25a244; padding: 28px 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 12px; max-width: 500px; margin: 0 auto;
+    }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #fff; color: #25a244;
+      padding: 14px 32px; border-radius: 8px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .btn-whatsapp:hover { background: #010101; color: #25f4ee; }
+
+    /* 9 - AVIS */
+    #avis { background: #f9f9f9; }
+    .avis-form {
+      max-width: 560px; margin: 0 auto;
+      background: #fff; border-radius: 16px;
+      padding: 40px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase; color: #888; margin-bottom: 8px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 13px 16px;
+      border: 1.5px solid #e5e5e5; border-radius: 8px;
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s; resize: vertical;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: #fe2c55; }
+    .btn-envoyer {
+      width: 100%; background: #fe2c55; color: #fff;
+      border: none; border-radius: 8px;
+      padding: 15px; font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-envoyer:hover { background: #e01e45; }
+
+    /* PANIER FLOTTANT */
+    .cart-btn {
+      position: fixed; bottom: 28px; right: 28px; z-index: 8000;
+      background: #fe2c55; color: #fff;
+      border: none; border-radius: 50px;
+      padding: 14px 22px; font-family: 'Poppins', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(254,44,85,0.5);
+      display: flex; align-items: center; gap: 10px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .cart-btn:hover { transform: scale(1.06); background: #e01e45; }
+    .cart-btn.hidden { display: none; }
+    .cart-count {
+      background: #fff; color: #fe2c55;
+      border-radius: 50%; width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 900;
+    }
+
+    /* MODALE PANIER */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9000;
+      background: rgba(0,0,0,0.75); align-items: center; justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: #fff; border-radius: 16px; padding: 32px;
+      width: 92%; max-width: 480px; position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      animation: modalIn 0.3s ease;
+      max-height: 90vh; overflow-y: auto;
+    }
+    @keyframes modalIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-close {
+      position: absolute; top: 14px; right: 18px;
+      background: none; border: none; font-size: 1.4rem;
+      cursor: pointer; color: #aaa; line-height: 1;
+    }
+    .modal-close:hover { color: #fe2c55; }
+    .modal-title { font-size: 1.3rem; font-weight: 700; color: #010101; margin-bottom: 6px; }
+    .modal-subtitle { font-size: 0.85rem; color: #888; margin-bottom: 20px; }
+
+    /* Articles du panier */
+    .cart-items { margin-bottom: 20px; }
+    .cart-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0; border-bottom: 1px solid #f0f0f0; gap: 10px;
+    }
+    .cart-item-name { font-size: 0.9rem; font-weight: 600; color: #222; flex: 1; }
+    .cart-item-qty {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .qty-btn {
+      background: #f0f0f0; border: none; border-radius: 50%;
+      width: 28px; height: 28px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .qty-btn:hover { background: #fe2c55; color: #fff; }
+    .qty-num { font-weight: 700; font-size: 0.95rem; min-width: 20px; text-align: center; }
+    .cart-item-del {
+      background: none; border: none; color: #ccc;
+      font-size: 1.1rem; cursor: pointer; transition: color 0.2s;
+    }
+    .cart-item-del:hover { color: #fe2c55; }
+    .cart-empty { text-align: center; color: #aaa; padding: 20px 0; font-size: 0.9rem; }
+
+    /* Formulaire dans le panier */
+    .modal-input {
+      width: 100%; padding: 13px 16px; margin-bottom: 12px;
+      border: 1.5px solid #e5e5e5; border-radius: 8px;
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .modal-input:focus { border-color: #fe2c55; }
+    .modal-btn {
+      width: 100%; background: #fe2c55; color: #fff;
+      border: none; border-radius: 8px; padding: 15px;
+      font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+      font-weight: 700; cursor: pointer; transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .modal-btn:hover { background: #e01e45; }
+    .modal-btn:disabled { background: #ccc; cursor: not-allowed; }
+    .modal-msg {
+      display: none; margin-top: 14px; padding: 12px;
+      border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-align: center;
+    }
+    .cart-divider { border: none; border-top: 2px dashed #f0f0f0; margin: 16px 0; }
+    /* FOOTER */
+    footer {
+      background: #010101; color: rgba(255,255,255,0.3);
+      text-align: center; padding: 24px; font-size: 0.8rem;
+    }
+    footer span { color: #fe2c55; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      section { padding: 50px 20px; }
+      .maps-band, .wa-band { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">TIK<span>TOK</span></div>
+  <ul class="nav-links">
+    <li><a href="#bienvenue">Accueil</a></li>
+    <li><a href="#qui">Qui sommes-nous</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#adresse">Adresse</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- 1. BIENVENUE -->
+<section id="bienvenue">
+  <div class="badge">🍽️ Restaurant TikTok — Lomé, Togo</div>
+  <h1>Bienvenue au Restaurant <span>TikTok</span> !</h1>
+  <p class="slogan">"Vos goûts, Notre priorité"</p>
+  <p>Nous sommes ouvert tous les jours de 09h à 22h Ici, chaque plat est une histoire. Nous vous accueillons avec chaleur et authenticité pour vous faire vivre une expérience culinaire togolaise comme nulle part ailleurs. Installez-vous, détendez-vous — la bonne cuisine arrive✅.</p>
+  <button class="btn-voir-menu" onclick="const el=document.getElementById('menu'); const y=el.getBoundingClientRect().top+window.scrollY-70; window.scrollTo({top:y,behavior:'smooth'});">🍽️ Voir le menu</button>
+</section>
+
+<!-- 2. QUI SOMMES-NOUS -->
+<section id="qui">
+  <div class="qui-inner">
+    <h2 class="section-title">Qui sommes-nous ?</h2>
+    <p>Le <strong>Restaurant TikTok</strong> est né d'une passion profonde pour la cuisine togolaise authentique. Situé en face du Camp d'Adidogomé à Lomé, nous préparons chaque jour des plats généreux avec des <strong>ingrédients frais et locaux</strong>.</p>
+    <p>Notre spécialité ? Les <strong>grands classiques togolais</strong> : Épokoumé ; Amakoumé ; foufou avec toute les différentes sauce togolaise nous vous présentons aussi du Djenkoume;Akpan; Pilon; du Riz ; du Spaghetti; de l'Attieké ;Frittes et couscous .Allez tout explorer dans notre menu 😊</p>
+    <p>Notre équipe met tout son cœur pour que chaque client reparte le ventre plein et le sourire aux lèvres. <strong>Vos goûts, Notre Priorité.</strong></p>
+  </div>
+</section>
+
+
+<!-- 4. POURQUOI NOUS CHOISIR -->
+<section id="pourquoi">
+  <h2 class="section-title">Pourquoi nous choisir ?</h2>
+  <div class="raisons-grid">
+    <div class="raison-card">
+      <div class="raison-icon">🌿</div>
+      <h3>100% Cuisine Locale & Authentique</h3>
+      <p>Tous nos plats sont préparés à partir de recettes togolaises traditionnelles, avec des ingrédients soigneusement sélectionnés sur les marchés locaux. Pas d'artifices, pas de surgélé — que du vrai, du frais, du bon.</p>
+    </div>
+    <div class="raison-card">
+      <div class="raison-icon">💰</div>
+      <h3>Prix Accessibles pour Tous</h3>
+      <p>Nous croyons que bien manger ne doit pas être un luxe. Notre carte est conçue pour que tout le monde — étudiant, famille ou professionnel — puisse se régaler sans se ruiner. Qualité et accessibilité, c'est notre engagement.</p>
+    </div>
+    <div class="raison-card">
+      <div class="raison-icon">🚀</div>
+      <h3>Livraison Rapide à Domicile</h3>
+      <p>Vous ne pouvez pas vous déplacer ? Pas de problème ! Nous livrons vos plats préférés directement chez vous. Rapidement, chaudement, et avec le même soin que si vous étiez attablés chez nous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. MENU -->
+<section id="menu">
+  <h2 class="section-title">Explorer notre Menu</h2>
+
+  <!-- ENTRÉES -->
+  <div class="menu-subtitle">🥗 Entrées</div>
+  <div class="entrees-grid">
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/salade-verte-classique.jpeg" alt="salade-verte-classique"/>
+      <div class="plat-info">
+        <div>
+          <div class="plat-name">Salade Verte Classique</div>
+          <div class="plat-price">A partir de 1500 FCFA</div>
+        </div>
+        <button class="btn-commander" onclick="commander('Salade + Saucisses')">Commander</button>
+      </div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/salade-saucisses.jpeg" alt="Beignets de Haricots"/>
+      <div class="plat-info">
+        <div>
+          <div class="plat-name">Salade + Saucisses</div>
+          <div class="plat-price">A partir de 1500 FCFA</div>
+        </div>
+        <button class="btn-commander" onclick="commander('Salade + Saucisses')">Commander</button>
+      </div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/salade-de-pommes-de-terre.jpeg" alt="Soupe de Légumes"/>
+      <div class="plat-info">
+        <div>
+          <div class="plat-name">Salade de pommes de terre </div>
+          <div class="plat-price">A partir de 2000 FCFA</div>
+        </div>
+        <button class="btn-commander" onclick="commander('Salade de pommes de terre">Commander</button>
+      </div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/hors-dœuvre.jpeg" alt="Acra de Crevettes"/>
+      <div class="plat-info">
+        <div>
+          <div class="plat-name">hors d'Oeuvre</div>
+          <div class="plat-price">A partir de 2000 FCFA</div>
+        </div>
+        <button class="btn-commander" onclick="commander('hors d'oeuvre')">Commander</button>
+      </div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/sauté-de-légumes.jpeg" alt="Brochettes de Viande"/>
+      <div class="plat-info">
+        <div>
+          <div class="plat-name">Sauté de légumes</div>
+          <div class="plat-price">A partir de 2000 FCFA</div>
+        </div>
+        <button class="btn-commander" onclick="commander('Sauté de Légumes')">Commander</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PLATS -->
+  <div class="menu-subtitle">🍲 Plats</div>
+  <div class="entrees-grid">
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/fufu-sauce-gombo.jpg" alt="Fufu & Sauce Gombo"/>
+      <div class="plat-info"><div><div class="plat-name">Fufu & Sauce Gombo</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Fufu & Sauce Gombo')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/gboma-dessi.jpg" alt="Gboma Dessi"/>
+      <div class="plat-info"><div><div class="plat-name">Gboma Dessi</div><div class="plat-price">1 200 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Gboma Dessi')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/riz-sauce-arachide.jpg" alt="Riz Sauce Arachide"/>
+      <div class="plat-info"><div><div class="plat-name">Riz Sauce Arachide</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Riz Sauce Arachide')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/gbota-gbota.jpg" alt="Gbota Gbota"/>
+      <div class="plat-info"><div><div class="plat-name">Gbota Gbota</div><div class="plat-price">1 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Gbota Gbota')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/pate-rouge-poisson.jpg" alt="Pâte Rouge & Poisson"/>
+      <div class="plat-info"><div><div class="plat-name">Pâte Rouge & Poisson</div><div class="plat-price">1 200 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Pâte Rouge & Poisson')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/akoume-sauce-legumes.jpg" alt="Akoumé & Sauce Légumes"/>
+      <div class="plat-info"><div><div class="plat-name">Akoumé & Sauce Légumes</div><div class="plat-price">900 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Akoumé & Sauce Légumes')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/poulet-dg.jpg" alt="Poulet DG"/>
+      <div class="plat-info"><div><div class="plat-name">Poulet DG</div><div class="plat-price">2 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Poulet DG')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/riz-jollof-maison.jpg" alt="Riz Jollof Maison"/>
+      <div class="plat-info"><div><div class="plat-name">Riz Jollof Maison</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Riz Jollof Maison')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/tilapia-grille-piments.jpg" alt="Tilapia Grillé & Piments"/>
+      <div class="plat-info"><div><div class="plat-name">Tilapia Grillé & Piments</div><div class="plat-price">1 800 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Tilapia Grillé & Piments')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/haricots-gari.jpg" alt="Haricots & Gari"/>
+      <div class="plat-info"><div><div class="plat-name">Haricots & Gari</div><div class="plat-price">700 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Haricots & Gari')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/pate-blanche-sauce-tomate.jpg" alt="Pâte Blanche & Sauce Tomate"/>
+      <div class="plat-info"><div><div class="plat-name">Pâte Blanche & Sauce Tomate</div><div class="plat-price">900 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Pâte Blanche & Sauce Tomate')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/riz-sauce-graine.jpg" alt="Riz & Sauce Graine"/>
+      <div class="plat-info"><div><div class="plat-name">Riz & Sauce Graine</div><div class="plat-price">1 100 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Riz & Sauce Graine')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/soupe-legumes-poisson.jpg" alt="Soupe Légumes & Poisson"/>
+      <div class="plat-info"><div><div class="plat-name">Soupe Légumes & Poisson</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Soupe Légumes & Poisson')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/koklo-meme-poulet-braise.jpg" alt="Koklo Meme (Poulet Braisé)"/>
+      <div class="plat-info"><div><div class="plat-name">Koklo Meme (Poulet Braisé)</div><div class="plat-price">2 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Koklo Meme Poulet Braisé')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/fufu-sauce-viande.jpg" alt="Fufu & Sauce Viande"/>
+      <div class="plat-info"><div><div class="plat-name">Fufu & Sauce Viande</div><div class="plat-price">1 200 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Fufu & Sauce Viande')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/riz-haricots.jpg" alt="Riz & Haricots"/>
+      <div class="plat-info"><div><div class="plat-name">Riz & Haricots</div><div class="plat-price">800 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Riz & Haricots')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/viande-de-buf-saute.jpg" alt="Viande de Bœuf Sauté"/>
+      <div class="plat-info"><div><div class="plat-name">Viande de Bœuf Sauté</div><div class="plat-price">2 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Viande de Bœuf Sauté')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/akoume-sauce-arachide.jpg" alt="Akoumé & Sauce Arachide"/>
+      <div class="plat-info"><div><div class="plat-name">Akoumé & Sauce Arachide</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Akoumé & Sauce Arachide')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/crevettes-sautees-riz.jpg" alt="Crevettes Sautées & Riz"/>
+      <div class="plat-info"><div><div class="plat-name">Crevettes Sautées & Riz</div><div class="plat-price">2 200 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Crevettes Sautées & Riz')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/pintade-rotie.jpg" alt="Pintade Rôtie"/>
+      <div class="plat-info"><div><div class="plat-name">Pintade Rôtie</div><div class="plat-price">3 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Pintade Rôtie')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/cabri-en-sauce.jpg" alt="Cabri en Sauce"/>
+      <div class="plat-info"><div><div class="plat-name">Cabri en Sauce</div><div class="plat-price">2 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Cabri en Sauce')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/pate-sauce-gombo-poisson.jpg" alt="Pâte & Sauce Gombo Poisson"/>
+      <div class="plat-info"><div><div class="plat-name">Pâte & Sauce Gombo Poisson</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Pâte & Sauce Gombo Poisson')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/riz-blanc-poulet-frit.jpg" alt="Riz Blanc & Poulet Frit"/>
+      <div class="plat-info"><div><div class="plat-name">Riz Blanc & Poulet Frit</div><div class="plat-price">1 800 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Riz Blanc & Poulet Frit')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/igname-pilee-sauce.jpg" alt="Igname Pilée & Sauce"/>
+      <div class="plat-info"><div><div class="plat-name">Igname Pilée & Sauce</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Igname Pilée & Sauce')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/poisson-braise-attieke.jpg" alt="Poisson Braisé & Attiéké"/>
+      <div class="plat-info"><div><div class="plat-name">Poisson Braisé & Attiéké</div><div class="plat-price">1 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Poisson Braisé & Attieké')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/spaghetti-sauce-viande.jpg" alt="Spaghetti Sauce Viande"/>
+      <div class="plat-info"><div><div class="plat-name">Spaghetti Sauce Viande</div><div class="plat-price">1 200 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Spaghetti Sauce Viande')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/riz-cantonnais-maison.jpg" alt="Riz Cantonnais Maison"/>
+      <div class="plat-info"><div><div class="plat-name">Riz Cantonnais Maison</div><div class="plat-price">1 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Riz Cantonnais Maison')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/frites-poulet.jpg" alt="Frites & Poulet"/>
+      <div class="plat-info"><div><div class="plat-name">Frites & Poulet</div><div class="plat-price">1 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Frites & Poulet')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/frites-poisson.jpg" alt="Frites & Poisson"/>
+      <div class="plat-info"><div><div class="plat-name">Frites & Poisson</div><div class="plat-price">1 300 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Frites & Poisson')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/omelette-frites.jpg" alt="Omelette & Frites"/>
+      <div class="plat-info"><div><div class="plat-name">Omelette & Frites</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Omelette & Frites')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/soupe-de-poisson-fume.jpg" alt="Soupe de Poisson Fumé"/>
+      <div class="plat-info"><div><div class="plat-name">Soupe de Poisson Fumé</div><div class="plat-price">1 200 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Soupe de Poisson Fumé')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/banane-plantain-sauce.jpg" alt="Banane Plantain & Sauce"/>
+      <div class="plat-info"><div><div class="plat-name">Banane Plantain & Sauce</div><div class="plat-price">800 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Banane Plantain & Sauce')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/aloco-viande.jpg" alt="Aloco & Viande"/>
+      <div class="plat-info"><div><div class="plat-name">Aloco & Viande</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Aloco & Viande')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/millet-sauce-tomate.jpg" alt="Millet & Sauce Tomate"/>
+      <div class="plat-info"><div><div class="plat-name">Millet & Sauce Tomate</div><div class="plat-price">700 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Millet & Sauce Tomate')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/macaroni-saute.jpg" alt="Macaroni Sauté"/>
+      <div class="plat-info"><div><div class="plat-name">Macaroni Sauté</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Macaroni Sauté')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/couscous-legumes.jpg" alt="Couscous & Légumes"/>
+      <div class="plat-info"><div><div class="plat-name">Couscous & Légumes</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Couscous & Légumes')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/poulet-yassa.jpg" alt="Poulet Yassa"/>
+      <div class="plat-info"><div><div class="plat-name">Poulet Yassa</div><div class="plat-price">2 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Poulet Yassa')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/buf-braise-attieke.jpg" alt="Bœuf Braisé & Attiéké"/>
+      <div class="plat-info"><div><div class="plat-name">Bœuf Braisé & Attiéké</div><div class="plat-price">2 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Bœuf Braisé & Attieké')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/sauce-nkui-fufu.jpg" alt="Sauce Nkui & Fufu"/>
+      <div class="plat-info"><div><div class="plat-name">Sauce Nkui & Fufu</div><div class="plat-price">1 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Sauce Nkui & Fufu')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/riz-sauce-claire-poisson.jpg" alt="Riz & Sauce Claire Poisson"/>
+      <div class="plat-info"><div><div class="plat-name">Riz & Sauce Claire Poisson</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Riz & Sauce Claire Poisson')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/tripes-en-sauce.jpg" alt="Tripes en Sauce"/>
+      <div class="plat-info"><div><div class="plat-name">Tripes en Sauce</div><div class="plat-price">1 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Tripes en Sauce')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/poulet-roti-frites.jpg" alt="Poulet Rôti & Frites"/>
+      <div class="plat-info"><div><div class="plat-name">Poulet Rôti & Frites</div><div class="plat-price">2 500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Poulet Rôti & Frites')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/porc-grille-igname.jpg" alt="Porc Grillé & Igname"/>
+      <div class="plat-info"><div><div class="plat-name">Porc Grillé & Igname</div><div class="plat-price">2 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Porc Grillé & Igname')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/fufu-sauce-palmiste.jpg" alt="Fufu & Sauce Palmiste"/>
+      <div class="plat-info"><div><div class="plat-name">Fufu & Sauce Palmiste</div><div class="plat-price">1 200 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Fufu & Sauce Palmiste')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/riz-saute-aux-legumes.jpg" alt="Riz Sauté aux Légumes"/>
+      <div class="plat-info"><div><div class="plat-name">Riz Sauté aux Légumes</div><div class="plat-price">1 000 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Riz Sauté aux Légumes')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/escargots-en-sauce-piquante.jpg" alt="Escargots en Sauce Piquante"/>
+      <div class="plat-info"><div><div class="plat-name">Escargots en Sauce Piquante</div><div class="plat-price">1 800 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Escargots en Sauce Piquante')">Commander</button></div>
+    </div>
+
+  </div>
+
+  <!-- DESSERTS -->
+  <div class="menu-subtitle">🍮 Desserts</div>
+  <div class="entrees-grid">
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/beignets-au-miel.jpg" alt="Beignets au Miel"/>
+      <div class="plat-info"><div><div class="plat-name">Beignets au Miel</div><div class="plat-price">300 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Beignets au Miel')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/bouillie-de-mil-sucree.jpg" alt="Bouillie de Mil Sucrée"/>
+      <div class="plat-info"><div><div class="plat-name">Bouillie de Mil Sucrée</div><div class="plat-price">400 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Bouillie de Mil Sucrée')">Commander</button></div>
+    </div>
+
+    <div class="plat-card entree-card">
+      <img class="plat-img-placeholder" src="images/salade-de-fruits-tropicaux.jpg" alt="Salade de Fruits Tropicaux"/>
+      <div class="plat-info"><div><div class="plat-name">Salade de Fruits Tropicaux</div><div class="plat-price">500 FCFA</div></div>
+      <button class="btn-commander" onclick="commander('Salade de Fruits Tropicaux')">Commander</button></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 6. POLITIQUE -->
+<section id="politique">
+  <h2>Politique de Commercialisation</h2>
+  <p>Vous pouvez venir chercher vos plats directement au restaurant ou vous les faire livrer confortablement chez vous.</p>
+  <div class="politique-icons">
+    <div class="pol-icon"><span>🏃</span><p>À emporter</p></div>
+    <div class="pol-icon"><span>🛵</span><p>Livraison à domicile</p></div>
+    <div class="pol-icon"><span>🪑</span><p>Sur place</p></div>
+  </div>
+</section>
+
+<!-- 7. ADRESSE -->
+<section id="adresse">
+  <h2 class="section-title">Notre Adresse</h2>
+  <p>Nous sommes <strong>en face du Camp d'Adidogomé</strong>, dans le Corner de la <strong>SUNU BANK</strong> — Lomé, Togo.</p>
+  <div class="maps-band">
+    <button class="btn-maps" onclick="ouvrirMaps()">
+      📍 Voir sur Google Maps
+    </button>
+  </div>
+</section>
+
+<!-- 8. CONTACT -->
+<section id="contact">
+  <h2 class="section-title">Contact</h2>
+  <p>Appelez-nous au :</p>
+  <div class="contact-phone">📞 +228 97 28 98 20</div>
+  <p style="margin-bottom: 20px;">Ou contactez-nous directement sur WhatsApp :</p>
+  <div class="wa-band">
+    <button class="btn-whatsapp" onclick="ouvrirWhatsApp('Bonjour%20Restaurant%20TikTok%2C%20je%20souhaite%20vous%20contacter.')">
+      💬 Discuter sur WhatsApp
+    </button>
+  </div>
+</section>
+
+
+
+
+
+<!-- 9. AVIS CLIENTS -->
+<section id="avis">
+  <h2 class="section-title">Avis Clients</h2>
+  <form class="avis-form" id="avisForm">
+    <div class="form-group">
+      <label for="nom">Votre Nom</label>
+      <input type="text" id="nom" placeholder="Ex : Kofi Amevor" required/>
+    </div>
+    <div class="form-group">
+      <label for="message">Votre Avis</label>
+      <textarea id="message" rows="5" placeholder="Partagez votre expérience chez nous..." required></textarea>
+    </div>
+    <button type="button" class="btn-envoyer" id="btnEnvoyer">Envoyer mon avis ✉️</button>
+    <div id="formMsg" style="display:none; margin-top:16px; padding:14px; border-radius:8px; font-size:0.9rem; font-weight:600; text-align:center;"></div>
+  </form>
+</section>
+
+<script>
+document.getElementById("btnEnvoyer").addEventListener("click", function() {
+  const nom = document.getElementById("nom").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  if (!nom || !message) {
+    alert("Veuillez remplir votre nom et votre avis avant d'envoyer.");
+    return;
+  }
+
+  // Encode le texte pour mailto
+  const subject = encodeURIComponent("Avis Client de " + nom);
+  const body = encodeURIComponent(message);
+  const mailtoLink = `mailto:restauranttiktok35@gmail.com?subject=${subject}&body=${body}`;
+
+  window.location.href = mailtoLink;
+});
+</script>
+
+<style>
+/* Styles de base pour le formulaire */
+#avis {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.section-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+}
+.btn-envoyer {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-envoyer:hover {
+  background: #218838;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ══════════════════════════════════════════
+  // ⚠️ REMPLACE CES 3 VALEURS (emailjs.com)
+  // ══════════════════════════════════════════
+  const EMAILJS_PUBLIC_KEY  = 'nhry5AbOu-WSXK85P';
+  const EMAILJS_SERVICE_ID  = 'service_x3tt38e';
+  const EMAILJS_TEMPLATE_ID = 'template_aukjsmm';
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  // ── PANIER ──
+  let panier = []; // [{nom, qte}]
+
+  function commander(nomPlat) {
+    const existing = panier.find(p => p.nom === nomPlat);
+    if (existing) {
+      existing.qte++;
+    } else {
+      panier.push({ nom: nomPlat, qte: 1 });
+    }
+    mettreAJourPanier();
+    // Feedback visuel rapide
+    const btn = event.target;
+    const original = btn.textContent;
+    btn.textContent = '✅ Ajouté !';
+    btn.style.background = '#25a244';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+    }, 1200);
+  }
+
+  function mettreAJourPanier() {
+    const total = panier.reduce((s, p) => s + p.qte, 0);
+    document.getElementById('cartCount').textContent = total;
+    const floatBtn = document.getElementById('cartFloatBtn');
+    floatBtn.classList.toggle('hidden', total === 0);
+  }
+
+  function ouvrirPanier() {
+    rendreCartItems();
+    document.getElementById('cmdNom').value = '';
+    document.getElementById('cmdTel').value = '';
+    document.getElementById('cmdQuartier').value = '';
+    document.getElementById('modalMsg').style.display = 'none';
+    document.getElementById('modalBtn').disabled = false;
+    document.getElementById('modalBtn').textContent = '📩 Envoyer la commande';
+    document.getElementById('modalOverlay').classList.add('active');
+  }
+
+  function rendreCartItems() {
+    const container = document.getElementById('cartItems');
+    if (panier.length === 0) {
+      container.innerHTML = '<div class="cart-empty">🛒 Votre panier est vide</div>';
+      return;
+    }
+    container.innerHTML = panier.map((p, i) => `
+      <div class="cart-item">
+        <div class="cart-item-name">${p.nom}</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changerQte(${i}, -1)">−</button>
+          <span class="qty-num">${p.qte}</span>
+          <button class="qty-btn" onclick="changerQte(${i}, 1)">+</button>
+        </div>
+        <button class="cart-item-del" onclick="supprimerPlat(${i})">🗑️</button>
+      </div>
+    `).join('');
+  }
+
+  function changerQte(index, delta) {
+    panier[index].qte += delta;
+    if (panier[index].qte <= 0) panier.splice(index, 1);
+    mettreAJourPanier();
+    rendreCartItems();
+  }
+
+  function supprimerPlat(index) {
+    panier.splice(index, 1);
+    mettreAJourPanier();
+    rendreCartItems();
+    if (panier.length === 0) fermerModal();
+  }
+
+  function fermerModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+  }
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) fermerModal();
+  });
+
+  // ── Envoyer la commande ──
+  async function envoyerCommande() {
+    const nom = document.getElementById('cmdNom').value.trim();
+    const tel = document.getElementById('cmdTel').value.trim();
+    const quartier = document.getElementById('cmdQuartier').value.trim();
+    const msg = document.getElementById('modalMsg');
+    const btn = document.getElementById('modalBtn');
+
+    if (panier.length === 0) {
+      msg.style.display = 'block';
+      msg.style.background = '#ffeaea';
+      msg.style.color = '#fe2c55';
+      msg.style.border = '1px solid #fe2c55';
+      msg.textContent = '⚠️ Votre panier est vide.';
+      return;
+    }
+    if (!nom || !tel || !quartier) {
+      msg.style.display = 'block';
+      msg.style.background = '#ffeaea';
+      msg.style.color = '#fe2c55';
+      msg.style.border = '1px solid #fe2c55';
+      msg.textContent = '⚠️ Veuillez remplir tous les champs.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours...';
+    msg.style.display = 'none';
+
+    const listePlats = panier.map(p => `- ${p.nom} x${p.qte}`).join('\n');
+
+    const templateParams = {
+      to_email:        'sandersjob030@gmail.com',
+      plat:            listePlats,
+      client_nom:      nom,
+      client_tel:      tel,
+      client_quartier: quartier,
+      date:            new Date().toLocaleString('fr-FR')
+    };
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+      msg.style.display = 'block';
+      msg.style.background = '#e6f9ec';
+      msg.style.color = '#25a244';
+      msg.style.border = '1px solid #25a244';
+      msg.textContent = '✅ Votre commande a bien été envoyée ! Nous vous contacterons très bientôt pour valider et organiser la livraison. Merci de votre confiance ! 🍽️';
+      btn.textContent = '✅ Envoyée !';
+      panier = [];
+      mettreAJourPanier();
+    } catch (err) {
+      const sujet = encodeURIComponent('Nouvelle commande — Restaurant TikTok');
+      const corps = encodeURIComponent(
+        'Commande de : ' + nom +
+        '\nTéléphone : ' + tel +
+        '\nQuartier : ' + quartier +
+        '\n\nPlats commandés :\n' + listePlats +
+        '\n\nDate : ' + new Date().toLocaleString('fr-FR')
+      );
+      window.location.href = 'mailto:sandersjob030@gmail.com?subject=' + sujet + '&body=' + corps;
+      msg.style.display = 'block';
+      msg.style.background = '#fff8e1';
+      msg.style.color = '#e67e00';
+      msg.style.border = '1px solid #e67e00';
+      msg.textContent = "📧 Votre messagerie s'est ouverte. Envoyez l'email pour confirmer.";
+      btn.textContent = '📩 Envoyer la commande';
+      btn.disabled = false;
+    }
+  }
+
+  // ── GOOGLE MAPS ──
+  function ouvrirMaps() {
+  var url = "https://maps.app.goo.gl/57dbQ2gWokDobKAS8";
+  var ua = navigator.userAgent || "";
+
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+  // 🔥 TikTok safe + fallback universel
+  if (isAndroid) {
+    // essaie ouverture app
+    window.location.href = url;
+
+  } else if (isIOS) {
+    // iPhone (TikTok bloque souvent les deep links)
+    window.location.href = url;
+
+  } else {
+    // PC ou autres
+    window.open(url, "_blank");
+  }
+}
+
+  // ── WHATSAPP ──
+  function ouvrirWhatsApp() {
+  var url = "https://wa.me/22897289820?text=Bonjour j'aimerais en savoir plus sur votre Restaurant";
+  var ua = navigator.userAgent || "";
+
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+  if (isAndroid || isIOS) {
+    // TikTok safe, fallback navigateur
+    window.location.href = url;
+  } else {
+    // PC ou autres
+    window.open(url, "_blank");
+  }
+}
+</script>
+  
+
+
+<!-- BOUTON PANIER FLOTTANT -->
+<button class="cart-btn hidden" id="cartFloatBtn" onclick="ouvrirPanier()">
+  🛒 Mon panier <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- MODALE PANIER -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fermerModal()">✕</button>
+    <div class="modal-title">🛒 Mon Panier</div>
+    <div class="modal-subtitle">Vérifiez votre commande avant d'envoyer</div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <hr class="cart-divider"/>
+
+    <div class="modal-subtitle">Vos coordonnées</div>
+    <input class="modal-input" type="text" id="cmdNom" placeholder="Votre nom complet" required/>
+    <input class="modal-input" type="tel" id="cmdTel" placeholder="Votre numéro de téléphone" required/>
+    <input class="modal-input" type="text" id="cmdQuartier" placeholder="Votre quartier (ex: Adidogomé, Bè...)" required/>
+    <button class="modal-btn" id="modalBtn" onclick="envoyerCommande()">📩 Envoyer la commande</button>
+    <div class="modal-msg" id="modalMsg"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Restaurant <span>TikTok</span> — Lomé, Togo &nbsp;·&nbsp; Mangez Local, Mangez Vrai
+</footer>
+
+</body>
+</html>
