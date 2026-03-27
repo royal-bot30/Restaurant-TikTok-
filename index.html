@@ -493,8 +493,6 @@
       <button class="btn-commander" onclick="commander('Bœuf Braisé & Attiéké')">Commander</button></div>
     </div>
 
-    
-
   </div>
 
   <div class="menu-subtitle">🍮 Desserts</div>
@@ -545,7 +543,7 @@
   <div class="contact-phone">📞 +228 97 28 98 20</div>
   <p style="margin-bottom: 20px;">Ou contactez-nous directement sur WhatsApp :</p>
   <div class="wa-band">
-    <button class="btn-whatsapp" onclick="ouvrirWhatsApp()">💬 Discuter sur WhatsApp</button>
+    <a class="btn-whatsapp" href="https://wa.me/22897289820?text=Bonjour%20j%27aimerais%20en%20savoir%20plus%20sur%20votre%20Restaurant." target="_blank" rel="noopener">💬 Discuter sur WhatsApp</a>
   </div>
 </section>
 
@@ -724,32 +722,37 @@
     msg.textContent = texte;
   }
 
+  // ✅ GOOGLE MAPS — corrigé avec le bon lien + compatibilité Android / iOS / navigateur TikTok
   function ouvrirMaps() {
-    var url = 'https://maps.app.goo.gl/XpxVtjZ885eJ8eTHA';
+    var lien = 'https://maps.app.goo.gl/qNTFoiWUPfTdRy7F6';
     var ua = navigator.userAgent || '';
-    if (/Android/i.test(ua)) {
-      window.location = 'intent://maps.google.com/maps?q=Camp+Adidogome+Lome+Togo&z=16#Intent;package=com.google.android.apps.maps;scheme=https;S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
+
+    // Navigateur TikTok : ne supporte pas les intent:// ni les schemes natifs — toujours ouvrir le lien web
+    if (/musical_ly|TikTok/i.test(ua)) {
+      window.open(lien, '_blank');
+    } else if (/Android/i.test(ua)) {
+      // Android : tente d'ouvrir l'app Google Maps, sinon repli sur le lien web
+      window.location = 'intent://maps.app.goo.gl/qNTFoiWUPfTdRy7F6#Intent;scheme=https;package=com.google.android.apps.maps;S.browser_fallback_url=' + encodeURIComponent(lien) + ';end';
     } else if (/iPhone|iPad|iPod/i.test(ua)) {
-      window.location = 'comgooglemaps://?q=Camp+Adidogome+Lome+Togo';
-      setTimeout(function() { window.open(url, '_blank'); }, 500);
+      // iOS : tente l'app Google Maps, sinon repli sur le lien web après 600ms
+      window.location = 'comgooglemaps://?q=Restaurant+TikTok+Lome+Togo';
+      setTimeout(function() { window.open(lien, '_blank'); }, 600);
     } else {
-      window.open(url, '_blank');
+      // Desktop / autres navigateurs
+      window.open(lien, '_blank');
     }
   }
 
+  // ✅ WHATSAPP — lien universel wa.me sur tous les OS pour déclencher le sélecteur WhatsApp / WhatsApp Business
   function ouvrirWhatsApp() {
     var numero = '22897289820';
-    var texte = encodeURIComponent("Bonjour Restaurant TikTok, je souhaite vous contacter.");
-    var fallback = 'https://wa.me/' + numero + '?text=' + texte;
-    var ua = navigator.userAgent || '';
-    if (/Android/i.test(ua)) {
-      window.location = 'intent://send/' + numero + '#Intent;package=com.whatsapp;scheme=whatsapp;S.browser_fallback_url=' + encodeURIComponent(fallback) + ';end';
-    } else if (/iPhone|iPad|iPod/i.test(ua)) {
-      window.location = 'whatsapp://send?phone=' + numero + '&text=' + texte;
-      setTimeout(function() { window.open(fallback, '_blank'); }, 600);
-    } else {
-      window.open(fallback, '_blank');
-    }
+    var texte = encodeURIComponent('Bonjour j\'aimerais en savoir plus sur votre Restaurant.');
+    var lien = 'https://wa.me/' + numero + '?text=' + texte;
+    // On utilise toujours https://wa.me/ — Android et iOS affichent automatiquement
+    // le sélecteur d'apps si WhatsApp ET WhatsApp Business sont installés.
+    // Le scheme natif whatsapp:// cible uniquement Messenger et contourne le sélecteur.
+    // Compatible navigateur TikTok également.
+    window.open(lien, '_blank');
   }
 
   document.getElementById('btnEnvoyer').addEventListener('click', function() {
