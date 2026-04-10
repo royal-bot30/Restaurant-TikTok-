@@ -1,6 +1,6 @@
-**Projet réalisé pour un un restaurant qui avis besoin de se faire mieux comprendre avec un Site Web**
+<h1>Projet réalisé pour un un restaurant qui avis besoin de se faire mieux comprendre avec un Site Web</h1>
 
-il contient :
+<h3>il contient</h3> :
 -Les informations Personnelles du restaurant 
 - Les images des plats
 - Les Prix
